@@ -131,3 +131,7 @@ let invoices = [
      return invoices;
  }
  
+
+ export function getInvoice(number:any){
+    return invoices.find((invoice)=> invoice.number === number);
+ }
