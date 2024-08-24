@@ -1,11 +1,11 @@
 
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 
 
 export default function App() {
   return (
-
+<>
     <nav
       style={{
         borderBottom: "solid 1px",
@@ -18,6 +18,9 @@ export default function App() {
 
 
     </nav>
+
+    <Outlet/>
+    </>
   )
 
 }
