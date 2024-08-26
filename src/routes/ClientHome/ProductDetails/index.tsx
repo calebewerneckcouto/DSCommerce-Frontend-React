@@ -1,8 +1,8 @@
-import ButtonPrimary from "../../components/ButtonPrimary";
-import ButtonSecond from "../../components/ButtonSecond";
-import HeaderClient from "../../components/HeaderClient";
-import { ProductDTO } from "../../components/models/product";
-import ProductDetailsCard from "../../components/ProductDetailsCard";
+import ButtonPrimary from "../../../components/ButtonPrimary";
+import ButtonSecond from "../../../components/ButtonSecond";
+import HeaderClient from "../../../components/HeaderClient";
+import { ProductDTO } from "../../../components/models/product";
+import ProductDetailsCard from "../../../components/ProductDetailsCard";
 import './styles.css'
 
 const product: ProductDTO = {
@@ -30,8 +30,7 @@ const product: ProductDTO = {
 
 export default function ProductDetails() {
   return (
-    <>
-      <HeaderClient />
+   
       <main>
         <section id="product-details-section" className="dsc-container">
 
@@ -42,7 +41,7 @@ export default function ProductDetails() {
           </div>
         </section>
       </main>
-    </>
+    
   );
 }
 

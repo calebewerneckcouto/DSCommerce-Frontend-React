@@ -1,10 +1,11 @@
 
 import './styles.css'
 
-import SearchBar from '../../components/SearchBar';
-import CatalogCard from '../../components/CatalogCard';
-import ButtonNextPage from '../../components/ButtonNextPage';
-import { ProductDTO } from "../../components/models/product";
+import SearchBar from '../../../components/SearchBar';
+import CatalogCard from '../../../components/CatalogCard';
+import ButtonNextPage from '../../../components/ButtonNextPage';
+import { ProductDTO } from "../../../components/models/product";
+import HeaderClient from '../../../components/HeaderClient';
 
 
 
@@ -33,9 +34,11 @@ const product: ProductDTO = {
 
 export default function Catalog() {
   return (
-
+      
     <main>
+      
       <section id="catalog-section" className="dsc-container">
+        
         <SearchBar />
 
         <div className="dsc-catalog-cards dsc-mb20 dsc-mt20">
@@ -54,6 +57,7 @@ export default function Catalog() {
         <ButtonNextPage/>
       </section>
     </main>
+  
 
   );
 }
