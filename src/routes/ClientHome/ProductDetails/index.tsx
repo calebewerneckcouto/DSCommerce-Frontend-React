@@ -5,6 +5,7 @@ import * as productService from '../../../services/product-service';
 import ProductDetailsCard from "../../../components/ProductDetailsCard";
 import './styles.css'
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 export default function ProductDetails() {
@@ -22,7 +23,10 @@ const product = productService.findById(Number(params.productId));
           
           <div className="dsc-btn-page-container">
             <ButtonPrimary text= "Comprar"/>
-            <ButtonSecond text= "Inicio"/>
+
+            <Link to ={"/"}>            <ButtonSecond text= "Inicio"/>
+            </Link>
+
           </div>
         </section>
       </main>
