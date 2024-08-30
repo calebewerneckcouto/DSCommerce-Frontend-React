@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ProductDTO } from "../../../components/models/product";
-import axios from "axios";
+import * as productService from '../../../services/product-service'
 
 export default function ProductDetails() {
     const { productId } = useParams(); // Extraia o productId dos parâmetros da URL
@@ -16,7 +16,7 @@ export default function ProductDetails() {
     useEffect(() => {
         if (productId) {
             // Use axios para buscar o produto
-            axios.get(`http://localhost:8080/products/${params.productId}`)
+          productService.findById(Number(params.productId))
                 .then(response => {
                     setProduct(response.data); // Atualize o estado com os dados recebidos
                     setProduct(response.data);
