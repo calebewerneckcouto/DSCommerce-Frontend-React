@@ -3,7 +3,7 @@ import ButtonSecond from "../../../components/ButtonSecond";
 
 import ProductDetailsCard from "../../../components/ProductDetailsCard";
 import './styles.css';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ProductDTO } from "../../../components/models/product";
@@ -13,16 +13,18 @@ export default function ProductDetails() {
     const { productId } = useParams(); // Extraia o productId dos parâmetros da URL
     const [product, setProduct] = useState<ProductDTO | null>(null); // Inicialize como null para lidar com carregamento
     const params = useParams();
+    const navigate = useNavigate();
     useEffect(() => {
         if (productId) {
             // Use axios para buscar o produto
           productService.findById(Number(params.productId))
                 .then(response => {
-                    setProduct(response.data); // Atualize o estado com os dados recebidos
+                    setProduct(response.data); 
                     setProduct(response.data);
                 })
-                .catch(error => {
-                    console.error('Erro ao buscar produto:', error);
+                .catch(() => {
+                   
+                   navigate("/");
                 });
         }
     }, []); // Adicione productId como dependência
