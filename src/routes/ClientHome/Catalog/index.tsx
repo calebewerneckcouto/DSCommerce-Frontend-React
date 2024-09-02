@@ -13,39 +13,43 @@ import { ProductDTO } from '../../../components/models/product';
 
 export default function Catalog() {
 
-  const [products,setProducts] = useState<ProductDTO[]>([]);
+  const [products, setProducts] = useState<ProductDTO[]>([]);
+  const [productName, setProductName] = useState("");
 
+  useEffect(() => {
+    productService.findPageRequest(0, productName)
+      .then(response => {
+        setProducts(response.data.content);
+      });
 
-  useEffect(()=>{
-            productService.findAll()
-            .then(response =>{
-                          setProducts(response.data.content);
-            });
+  }, [productName]);
 
-  },[]);
+  function handleSearch(searchText: string) {
+    setProductName(searchText);
+  }
   return (
-      
+
     <main>
-      
+
       <section id="catalog-section" className="dsc-container">
-        
-        <SearchBar />
+
+        <SearchBar onSearch={handleSearch} />
 
         <div className="dsc-catalog-cards dsc-mb20 dsc-mt20">
 
-           {products.map(product =><CatalogCard key={product.id} product={product}/>)
+          {products.map(product => <CatalogCard key={product.id} product={product} />)
 
-           }
+          }
 
-          
-     
-          
+
+
+
         </div>
 
-        <ButtonNextPage/>
+        <ButtonNextPage />
       </section>
     </main>
-  
+
 
   );
 }
