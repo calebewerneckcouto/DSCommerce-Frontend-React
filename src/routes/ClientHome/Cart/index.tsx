@@ -11,8 +11,13 @@ export default function Cart() {
   const [cart, setCart] = useState<OrderDTO>(cartService.getCart());
 
 
-  function handleClearClick () {
+  function handleClearClick() {
     cartService.clearCart();
+    setCart(cartService.getCart());
+  }
+
+  function handleIncreaseItem(productId: number) {
+    cartService.increaseItem(productId);
     setCart(cartService.getCart());
   }
 
@@ -38,7 +43,7 @@ export default function Cart() {
                         <div className="dsc-cart-item-quantity-container">
                           <div className="dsc-cart-item-quantity-btn">-</div>
                           <p>{item.quantity}</p>
-                          <div className="dsc-cart-item-quantity-btn">+</div>
+                          <div onClick={() => handleIncreaseItem(item.productId)} className="dsc-cart-item-quantity-btn">+</div>
                         </div>
                       </div>
                     </div>
@@ -59,13 +64,13 @@ export default function Cart() {
           <div className="dsc-btn dsc-btn-blue">
             Finalizar pedido
           </div>
-          <Link to ="/catalog">
-          <div  className="dsc-btn dsc-btn-white">
-            Continuar comprando
-          </div>
+          <Link to="/catalog">
+            <div className="dsc-btn dsc-btn-white">
+              Continuar comprando
+            </div>
           </Link>
-          <div onClick={handleClearClick}  className="dsc-btn dsc-btn-white">
-           Limpar Carrinho
+          <div onClick={handleClearClick} className="dsc-btn dsc-btn-white">
+            Limpar Carrinho
           </div>
         </div>
       </section>
