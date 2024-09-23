@@ -1,19 +1,55 @@
+import { useState } from 'react';
 import './styles.css'
+import { CredentialsDTO } from '../../../components/models/auth';
+import { loginRequest } from '../../../services/auth-service';
 
-export default function Login(){
-    return(
-        <main>
+export default function Login() {
+
+  const [formData, setFormData] = useState<CredentialsDTO>({
+    username: '',
+    password: ''
+  })
+
+  function handleSubmit(event: any) {
+    event.preventDefault();
+    loginRequest(formData);
+
+
+  }
+
+  function handleInputChange (event:any) {
+    const value =  event.target.value;
+    const name =  event.target.name;
+    setFormData({...formData,[name]:value})
+
+  }
+
+
+  return (
+    <main>
       <section id="login-section" className="dsc-container">
-        <div className="dsc-login-form-container">
+        <div className="dsc-login-form-container" onSubmit={handleSubmit}>
           <form className="dsc-card dsc-form">
             <h2>Login</h2>
             <div className="dsc-form-controls-container">
               <div>
-                <input className="dsc-form-control" type="text" placeholder="Email"/>
+                <input 
+                name="username"
+                value={formData.username}
+                onChange={handleInputChange}
+                className="dsc-form-control"
+                 type="text"
+                  placeholder="Email" />
                 <div className="dsc-form-error"></div>
               </div>
               <div>
-                <input className="dsc-form-control" type="password" placeholder="Senha"/>
+                <input 
+                 name="password"
+                 value={formData.password}
+                 onChange={handleInputChange}
+                className="dsc-form-control"
+                 type="password" 
+                 placeholder="Senha" />
               </div>
             </div>
 
@@ -24,5 +60,5 @@ export default function Login(){
         </div>
       </section>
     </main>
-    );
+  );
 }
