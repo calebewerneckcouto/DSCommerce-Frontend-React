@@ -60,16 +60,14 @@ export function isAuthenticated(): boolean {
 export function hasAnyRoles(roles: RoleEnum[]): boolean {
     if (roles.length === 0) {
         return true;
-
     }
     const tokenPayload = getAcessTokenPayload();
     if (tokenPayload !== undefined) {
-        for (var i = 0; i = roles.length; i++) {
+        for (var i = 0; i < roles.length; i++) {  // Correção: i < roles.length
             if (tokenPayload.authorities.includes(roles[i])) {
                 return true;
             }
         }
-        //return roles.some(role => tokenData.authorities.includes(roles));
     }
     return false;
 }

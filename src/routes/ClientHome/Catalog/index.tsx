@@ -7,7 +7,7 @@ import ButtonNextPage from '../../../components/ButtonNextPage';
 import * as productService from '../../../services/product-service'
 import { useEffect, useState } from 'react';
 import { ProductDTO } from '../../../components/models/product';
-import { hasAnyRoles} from '../../../services/auth-service';
+
 
 type QueryParams = {
   page: number;
@@ -27,7 +27,7 @@ export default function Catalog() {
 
 
   useEffect(() => {
-    console.log("TESTE" , hasAnyRoles(['ROLE_CLIENT']) );
+    
     productService.findPageRequest(queryParams.page, queryParams.name)
       .then(response => {
         const nextPage = response.data.content;
