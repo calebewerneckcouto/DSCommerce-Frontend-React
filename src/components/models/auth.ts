@@ -5,8 +5,8 @@ export type CredentialsDTO = {
     password:string;
 };
 
-export type AcessTokenPayloadDTO = {
+export type AccessTokenPayloadDTO = {
     exp:number,
-    user_name:string,
+    username:string,
     authorities: RoleEnum[];
 };

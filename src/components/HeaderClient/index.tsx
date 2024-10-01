@@ -1,5 +1,3 @@
-
-
 import { Link } from 'react-router-dom'
 import './styles.css'
 import CartIcon from '../CartIcon';
@@ -7,18 +5,16 @@ import iconAdmin from '../../assets/admin.svg';
 import * as authService from '../../services/auth-service';
 import { useContext } from 'react';
 import { ContextToken } from '../../utils/context-token';
+import LoggedUser from '../LoggedUser'; // Importando o componente
 
 export default function HeaderClient() {
 
   const { contextTokenPayload } = useContext(ContextToken);
 
-
-
   return (
     <>
       <header className="dsc-header-client">
         <nav className="dsc-container">
-
 
           <Link to={"/"}>
             <h1>DSCommerce</h1>
@@ -36,23 +32,19 @@ export default function HeaderClient() {
                 </Link>
               }
 
-
-
               <Link to="/cart">
                 <div className="dsc-menu-item">
                   <CartIcon />
                 </div>
               </Link>
             </div>
-            <Link to="/login">
-              Entrar
-            </Link>
+
+            {/* Aqui utilizamos o componente LoggedUser */}
+            <LoggedUser />
+
           </div>
         </nav>
       </header>
     </>
   );
-
-
 }
-

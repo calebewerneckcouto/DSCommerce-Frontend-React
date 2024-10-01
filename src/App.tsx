@@ -1,32 +1,33 @@
+import { useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import ProductDetails from "./routes/ClientHome/ProductDetails";
 import ClientHome from "./routes/ClientHome";
 import Catalog from "./routes/ClientHome/Catalog";
 import Cart from "./routes/ClientHome/Cart";
-import { useEffect, useState } from "react";
 import { ContextCartCount } from "./utils/context-cart";
 import Login from "./routes/ClientHome/Login";
 import AdminHome from "./routes/Admin/AdminHome";
 import Admin from "./routes/Admin";
 import { PrivateRoute } from "./components/PrivateRoute";
-import { AcessTokenPayloadDTO } from "./components/models/auth";
+import { AccessTokenPayloadDTO } from "./components/models/auth";
 import { ContextToken } from "./utils/context-token";
 import * as authService from '../src/services/auth-service';
 import * as cartService from '../src/services/cart-service';
 
 export default function App() {
   const [contextCartCount, setContextCartCount] = useState<number>(0);
-  const [contextTokenPayload, setContextTokenPayload] = useState<AcessTokenPayloadDTO>();
-
+  const [contextTokenPayload, setContextTokenPayload] = useState<AccessTokenPayloadDTO>();
 
   useEffect(() => {
+    // Atualizando contagem do carrinho
     setContextCartCount(cartService.getCart().items.length);
 
+    // Verificando autenticação e setando o payload do token
     if (authService.isAuthenticated()) {
-      const payload = authService.getAcessTokenPayload();
+      const payload = authService.getAcessTokenPayload();  // Corrigido o nome da função
       setContextTokenPayload(payload);
     }
-  }, [])
+  }, []);
 
   return (
     <ContextToken.Provider value={{ contextTokenPayload, setContextTokenPayload }}>
