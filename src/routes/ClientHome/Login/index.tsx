@@ -3,8 +3,11 @@ import './styles.css'
 import { CredentialsDTO } from '../../../components/models/auth';
 
 import * as authService from '../../../services/auth-service';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState<CredentialsDTO>({
     username: '',
@@ -16,7 +19,7 @@ export default function Login() {
     authService.loginRequest(formData)
       .then(response => {
         authService.saveAcessToken(response.data.access_token)
-        console.log(authService.getAcessTokenPayload());
+        navigate("/cart")
       })
       .catch(error => {
         console.log("Erro no Login", error);
