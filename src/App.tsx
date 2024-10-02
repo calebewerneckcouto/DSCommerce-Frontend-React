@@ -6,7 +6,7 @@ import Catalog from "./routes/ClientHome/Catalog";
 import Cart from "./routes/ClientHome/Cart";
 import { ContextCartCount } from "./utils/context-cart";
 import Login from "./routes/ClientHome/Login";
-import AdminHome from "./routes/Admin/AdminHome";
+
 import Admin from "./routes/Admin";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { AccessTokenPayloadDTO } from "./components/models/auth";
@@ -14,6 +14,9 @@ import { ContextToken } from "./utils/context-token";
 import * as authService from '../src/services/auth-service';
 import * as cartService from '../src/services/cart-service';
 import Confirmation from "./routes/Confirmation";
+import ProductListing from "./routes/Admin/ProductListing";
+import ProductForm from "./routes/Admin/ProductForm";
+import AdminHome from "./routes/Admin/AdminHome";
 
 export default function App() {
   const [contextCartCount, setContextCartCount] = useState<number>(0);
@@ -58,7 +61,12 @@ export default function App() {
                 <Admin />
               </PrivateRoute>
             }>
-              <Route index element={<AdminHome />} />
+              <Route index element={<Navigate to="/admin/home" />} />
+              <Route path="home" element={<AdminHome />} />
+              <Route path="products" element={<ProductListing />} />
+              <Route path="products/:productId" element={<ProductForm />} />
+
+              
             </Route>
 
             {/* Redirecionamento de rota não encontrada */}
