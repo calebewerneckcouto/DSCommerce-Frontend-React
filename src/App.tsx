@@ -42,7 +42,14 @@ export default function App() {
               <Route path="login" element={<Login />} />
               <Route path="catalog" element={<Catalog />} />
               <Route path="product-details/:productId" element={<ProductDetails />} />
-              <Route path="confirmation/:orderId" element={<Confirmation/>} />
+              <Route 
+  path="confirmation/:orderId" 
+  element={
+    <PrivateRoute>
+      <Confirmation />
+    </PrivateRoute>
+  } 
+/>
             </Route>
 
             {/* Rotas para o admin */}
