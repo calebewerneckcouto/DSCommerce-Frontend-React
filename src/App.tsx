@@ -13,6 +13,7 @@ import { AccessTokenPayloadDTO } from "./components/models/auth";
 import { ContextToken } from "./utils/context-token";
 import * as authService from '../src/services/auth-service';
 import * as cartService from '../src/services/cart-service';
+import Confirmation from "./routes/Confirmation";
 
 export default function App() {
   const [contextCartCount, setContextCartCount] = useState<number>(0);
@@ -41,6 +42,7 @@ export default function App() {
               <Route path="login" element={<Login />} />
               <Route path="catalog" element={<Catalog />} />
               <Route path="product-details/:productId" element={<ProductDetails />} />
+              <Route path="confirmation/:orderId" element={<Confirmation/>} />
             </Route>
 
             {/* Rotas para o admin */}
