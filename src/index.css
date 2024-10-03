@@ -146,6 +146,7 @@ nav a {
 .dsc-logged-user p {
   font-size: 12px;
 }
+
 .dsc-logged-user span {
   cursor: pointer;
   font-weight: 700;
@@ -382,7 +383,7 @@ nav a {
 /*-----------------------------------------------------------------*/
 /* dialog styles */
 
-.dsc-dialog-background{
+.dsc-dialog-background {
 
   position: fixed;
   top: 0;
@@ -392,8 +393,8 @@ nav a {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.dsc-dialog-box{
-   display: flex;
+.dsc-dialog-box {
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -403,19 +404,25 @@ nav a {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
 
-.dsc-dialog-box h2{
+.dsc-dialog-box h2 {
   font-size: 20px;
-  color: var(--dsc-color-font-primary) ;
+  color: var(--dsc-color-font-primary);
   margin-bottom: 20px;
 }
 
-.dsc-dialog-btn-container{
+.dsc-dialog-btn-container {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 18px;
- 
+
+}
+
+.dsc-dialog-btn {
+  width: 100%;
+
+
 }
