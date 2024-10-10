@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import './styles.css'
-import { CredentialsDTO } from '../../../components/models/auth';
+
 
 import * as authService from '../../../services/auth-service';
 import { useNavigate } from 'react-router-dom';
@@ -12,14 +12,30 @@ export default function Login() {
 
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState<CredentialsDTO>({
-    username: '',
-    password: ''
-  })
+  const [formData, setFormData] = useState<any>({
+    username: {
+    value: "",
+    id: "username",
+    name: "username",
+    type: "text",
+    placeholder: "Email",
+    validation: function (value: string) {
+    return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(value.toLowerCase());
+    },
+    message: "Favor informar um email válido",
+    },
+    password: {
+    value: "",
+    id: "password",
+    name: "password",
+    type: "password",
+    placeholder: "Senha",
+    }
+    })
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    authService.loginRequest(formData)
+    authService.loginRequest({username:formData.username.value,password:formData.password.value})
       .then(response => {
         authService.saveAcessToken(response.data.access_token);
         setContextTokenPayload(authService.getAcessTokenPayload());
@@ -36,7 +52,7 @@ export default function Login() {
   function handleInputChange(event: any) {
     const value = event.target.value;
     const name = event.target.name;
-    setFormData({ ...formData, [name]: value })
+    setFormData({ ...formData, [name]: {...formData[name],value:value} })
 
   }
 
@@ -51,7 +67,7 @@ export default function Login() {
               <div>
                 <input
                   name="username"
-                  value={formData.username}
+                  value={formData.username.value}
                   onChange={handleInputChange}
                   className="dsc-form-control"
                   type="text"
@@ -61,7 +77,7 @@ export default function Login() {
               <div>
                 <input
                   name="password"
-                  value={formData.password}
+                  value={formData.password.value}
                   onChange={handleInputChange}
                   className="dsc-form-control"
                   type="password"
