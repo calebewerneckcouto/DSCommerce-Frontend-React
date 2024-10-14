@@ -9,12 +9,17 @@ import ButtonNextPage from '../../../components/ButtonNextPage';
 import DialogInfo from '../../../components/DialogInfo';
 import DialogConfirmation from '../../../components/DialogConfirmation';
 
+import ButtonSecond from '../../../components/ButtonSecond';
+import { useNavigate } from 'react-router-dom';
+
 type QueryParams = {
   page: number;
   name: string;
 }
 
 export default function ProductListing() {
+
+  const navigate = useNavigate();
   const [dialogInfoData, setDialogInfoData] = useState({
     visible: false,
     message: "Operação com Sucesso!!"
@@ -45,6 +50,11 @@ export default function ProductListing() {
 
   }, [queryParams]);
 
+
+  function handleNewProductClick(){
+      navigate("/admin/products/create");
+  }
+
   function handleSearch(searchText: string) {
     setProducts([])
     setQueryparams({ ...queryParams, page: 0, name: searchText });
@@ -69,11 +79,11 @@ export default function ProductListing() {
           setProducts([]);
           setQueryparams({ ...queryParams, page: 0 });
         })
-        .catch(error =>{
-           setDialogInfoData({
-            visible:true,
-            message:error.response.data.error
-           })
+        .catch(error => {
+          setDialogInfoData({
+            visible: true,
+            message: error.response.data.error
+          })
         })
     }
 
@@ -88,7 +98,11 @@ export default function ProductListing() {
         <h2 className="dsc-section-title dsc-mb20">Cadastro de produtos</h2>
 
         <div className="dsc-btn-page-container dsc-mb20">
-          <div className="dsc-btn dsc-btn-white">Novo</div>
+
+          <div onClick={handleNewProductClick}>
+            <ButtonSecond text='Novo' />
+          </div>
+
         </div>
 
         <SearchBar onSearch={handleSearch} />
