@@ -40,7 +40,8 @@ export default function ProductForm() {
         if(isEditing){
             productService.findById(Number(params.productId))
             .then(response => {
-                console.log(response.data);
+                
+                setFormData(forms.updateAll(formData,response.data));
             })
         }
     },[])
