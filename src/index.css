@@ -240,6 +240,11 @@ nav a {
   margin: 20px 0;
 }
 
+.dsc-form-select-container{
+  padding: unset;
+  height: unset;
+}
+
 .dsc-form-control {
   width: 100%;
   height: 40px;
