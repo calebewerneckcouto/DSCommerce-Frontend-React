@@ -106,10 +106,15 @@ export default function ProductForm() {
     }
 
 
-  function handleSubmit(event: any){
-    event.preventDefault();
-    console.log(forms.toValues(formData));
-  }
+    function handleSubmit(event: any) {
+        event.preventDefault();
+        const formDataValidated = forms.dirtyAndValidateAll(formData);
+        if (forms.hasAnyInvalid(formDataValidated)) {
+            setFormData(formDataValidated);
+            return;
+        }
+       
+    }
 
 
     return (
@@ -152,21 +157,21 @@ export default function ProductForm() {
                             </div>
 
                             <div>
-                                <FormSelect 
-                                {...formData.categories}
-                                className="dsc-form-control"
-                                styles ={selectStyles}
-                                options={categories}
-                                    onChange={(obj:any) => {
+                                <FormSelect
+                                    {...formData.categories}
+                                    className="dsc-form-control"
+                                    styles={selectStyles}
+                                    options={categories}
+                                    onChange={(obj: any) => {
                                         const newFormData = forms.update(formData, "categories", obj);
                                         setFormData(newFormData);
                                     }}
                                     onTurnDirty={handleTurnDirty}
                                     isMulti
-                                    getOptionLabel={(obj:any) => obj.name}
-                                    getOptionValue={(obj:any) => String(obj.id)}
+                                    getOptionLabel={(obj: any) => obj.name}
+                                    getOptionValue={(obj: any) => String(obj.id)}
                                 />
-                                  <div className='dsc-form-error'>{formData.categories.message}</div>
+                                <div className='dsc-form-error'>{formData.categories.message}</div>
                             </div>
 
                             <div>
