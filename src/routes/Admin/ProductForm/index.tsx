@@ -123,7 +123,12 @@ export default function ProductForm() {
             : productService.insertRequest(requestBody);
         request
             .then(() => {
-                navigate("/admin/products")
+                navigate("/admin/products");
+            })
+            .catch(error =>{
+                const newInputs = forms.setBackendErrors(formData,error.response.data.errors);
+                setFormData(newInputs);
+                console.log(error);
             })
     }
 
